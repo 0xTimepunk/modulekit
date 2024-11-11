@@ -79,9 +79,12 @@ library ModuleKitHelpers {
                                     EXECUTIONS
     //////////////////////////////////////////////////////////////////////////*/
 
-    function execUserOps(UserOpData memory userOpData) internal {
+    function execUserOps(UserOpData memory userOpData)
+        internal
+        returns (VmSafe.Log[] memory logs)
+    {
         // send userOp to entrypoint
-        ERC4337Helpers.exec4337(userOpData.userOp, userOpData.entrypoint);
+        logs = ERC4337Helpers.exec4337(userOpData.userOp, userOpData.entrypoint);
     }
 
     function getExecOps(
